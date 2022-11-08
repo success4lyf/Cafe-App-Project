@@ -29,11 +29,11 @@ class App:
         quit()
 
 class ProductMenu(App):
-    def __init__(self, exit, main_menu, products, product_menu, order_menu):
+    def __init__(self, exit, main_menu, products, product_menu):
         super().__init__(exit, main_menu)       
         self.products = products
         self.product_menu = product_menu
-        self.order_menu = order_menu
+        
         
     def get_product_menu(self):
         for i, option in enumerate(product_menu):
@@ -89,7 +89,8 @@ class ProductMenu(App):
         print(products)
 
 class OrderMenu(App):
-    def __init__(self, exit, main_menu, orders_dict, create_order, update_order, delete_order):
+    def __init__(self, exit, main_menu, order_menu):
+        self.order_menu = order_menu
         super().__init__(exit, main_menu)
     
     def get_order_menu(self):
@@ -162,8 +163,8 @@ orders_list = []
 order_status = ["Preparing", "Awaiting Pickup", "Out-for-Delivery", "Delivered"]
 # order_lists = [{orders_dict}, {orders_dict}]
 
-p_menu = ProductMenu(exit, main_menu, products, product_menu, order_menu)
-o_menu = OrderMenu()
+p_menu = ProductMenu(exit, main_menu, products, product_menu)
+o_menu = OrderMenu(main_menu, orders_dict, order_menu)
 #p_menu.get_main_menu()
 
 
