@@ -16,10 +16,12 @@ class App:
         if user == 0:
             print(f'you entered {user}.')
             print('exit app')
-            p_menu.exit_app()    
+            p_menu.exit_app() 
+
         elif user == 1:
             print(f'You entered {user}. The product menu options are: ')
             p_menu.get_product_menu()
+            
         elif user == 2:
             print(f'You entered {user}. The order menu options are: ')
             o_menu.get_order_menu()
@@ -165,7 +167,7 @@ order_status = ["Preparing", "Awaiting Pickup", "Out-for-Delivery", "Delivered"]
 
 p_menu = ProductMenu(exit, main_menu, products, product_menu)
 o_menu = OrderMenu(main_menu, orders_dict, order_menu)
-#p_menu.get_main_menu()
+p_menu.get_main_menu()
 
 
 
