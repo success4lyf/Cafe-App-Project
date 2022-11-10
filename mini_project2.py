@@ -21,7 +21,7 @@ class App:
         elif user == 1:
             print(f'You entered {user}. The product menu options are: ')
             p_menu.get_product_menu()
-            
+
         elif user == 2:
             print(f'You entered {user}. The order menu options are: ')
             o_menu.get_order_menu()
@@ -62,6 +62,8 @@ class ProductMenu(App):
     def get_product_list(self):
         print('The product lists are: ')       
         print(products)
+        p_menu.create_new_product()
+
 
     def create_new_product(self):
         print('Create a new product you want to add to the product list...')
@@ -69,17 +71,23 @@ class ProductMenu(App):
         products.append(user_new)
         print('you created a new product: ', user_new)
         print('New product list = ', products)
+        p_menu.update_product()
 
     def update_product(self):
         print('This are the list of products we have below: ')
         for i, product in enumerate(products):
             print(f'{i}: {product}')
         print('If you want to update a product, ')
-        user_pro_num = int(input('Enter an index value of a product: '))
+        user_pro_num = int(input('Enter an index value of a product: '))        
+        # if user_pro_num > products[i]:
+        #     print('out of range')
+        #     p_menu.update_product()
+        # else:
         user_pro_name = input('Enter a product name: ')
         products[user_pro_num] = user_pro_name
         print('The updated product list is: ')
         print(products)
+        p_menu.delete_product()
 
     def delete_product(self):
         print('The product list are: ')
@@ -104,7 +112,7 @@ class OrderMenu(App):
             print(f'You entered {user_o}. You have returned to the main menu!')
             p_menu.get_main_menu()
         elif user_o == 1:
-            print(orders_dict)
+            print('The current orders are: ', orders_dict)      
         elif user_o == 2:
             o_menu.get_order_details()
         elif user_o == 3:
@@ -133,7 +141,9 @@ class OrderMenu(App):
         self.orders_dict.update({self.address : user_address})
         self.orders_dict.update({self.phone : user_phone})
         self.orders_dict.update({self.status : self.order_status[0]})
-        self.order_list.append(self.orders_dict)       
+        self.order_list.append(self.orders_dict)
+        print(self.order_list)
+        o_menu.get_order_menu()    
 
     def update_orders_status(self):
         for i, order in enumerate(orders_list):
@@ -159,7 +169,7 @@ exit = 0
 main_menu = ['exit', 'product_menu', 'order_menu']
 products = ['rice', 'beans', 'pasta', 'egg', 'potatoes']
 product_menu = ['main_menu', 'product_list', 'create', 'update', 'delete']
-order_menu = ['main_menu', 'orders_dict', 'creare order',  'update order', 'delete order']
+order_menu = ['main_menu', 'orders_dict', 'create order',  'update order', 'delete order']
 orders_dict = {}
 orders_list = []
 order_status = ["Preparing", "Awaiting Pickup", "Out-for-Delivery", "Delivered"]

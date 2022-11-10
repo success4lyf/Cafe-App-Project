@@ -1,7 +1,6 @@
 ################  PROJECT ######################
 
 ##### MINI PROJECT 1 #####
-
 main_menu = ['exit', 'product_menu', ]
 products = ['rice', 'beans', 'pasta', 'egg', 'potatoes']
 product_menu = ['main_menu', 'product_list', 'create', 'update', 'delete']
@@ -10,15 +9,15 @@ def get_main_menu():
     print('Welcome! The main menu options are: ')
     for i, menu in enumerate(main_menu):
         print(f'{i} = {menu}')
-
+    
     user = int(input('enter an option from the main menu:'))
     if user == 0:
-        print(f'you entered {user}.')
-        exit_app()       
+        print(f'you entered {user}. exit app')
+        quit()               
     elif user == 1:
         print(f'You entered {user}. The product menu options are: ')
         get_product_menu()
-
+    
 def get_product_menu():
     for i, option in enumerate(product_menu):
         print(f'{i}: {option}')
@@ -26,25 +25,25 @@ def get_product_menu():
     user_p = int(input('enter a product menu option:'))
     if user_p == 0:
         print(f'You entered {user_p}. You have returned to the main menu!')
-        get_main_menu()
+        get_main_menu()      
     elif user_p == 1:
-        product_list()
+        product_list()        
     elif user_p == 2:
         print(f'you entered {user_p}.')
-        create_new()
+        create_new()       
     elif user_p == 3:
-        update()
+        update()       
     elif user_p == 4:
         print(f'You entered {user_p}: "delete"')
-        delete()
+        delete()        
     else:
         print('invalid input')
-        get_product_menu()
+        get_product_menu()  
 
 def product_list():
     print('The product lists are: ')       
     print(products)
-    create_new()
+    #create_new()
 
 def create_new():
     print('Create a new product you want to add to the product list...')
@@ -52,7 +51,7 @@ def create_new():
     products.append(user_new)
     print('you created a new product: ', user_new)
     print('New product list = ', products)
-    update()
+    #update()
 
 def update():
     print('This are the list of products we have below: ')
@@ -79,9 +78,6 @@ def delete():
     print('Deleted!. The products remaining are: ')
     print(products)
     get_main_menu()
-
-def exit_app():
-    print('exit app')
-    quit()
-
+   
 get_main_menu()
+    
