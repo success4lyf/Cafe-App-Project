@@ -1,7 +1,5 @@
 ##### MINI PROJECT WEEK 2 #####
 
-#import main_menu
-
 class OrderMenu():
     def __init__(self, order_menu):
         self.order_menu = order_menu
