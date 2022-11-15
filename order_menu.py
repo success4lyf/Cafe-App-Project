@@ -104,17 +104,20 @@ class OrderMenu():
 
 order_menu = ['Main Menu', 'Order Details', 'Add Order Details',  'Update Existing Order Status', 'Update Existing Order', 'Delete Order']
 orders_dict = {}
-orders_list = [{
-  "Name": "John",
-  "Address": "Unit 2, 12 Main Street, LONDON, WH1 2ER",
-  "Phone Num": "0789887334",
-  "Order Status": "preparing"
-}, {
-  "Name": "James",
-  "Address": "Unit 9, 19 Main Street, LONDON, WC1 2EY",
-  "Phone Num": "07897643257",
-  "Order Status": "preparing"
-}]
+orders_list = [{"Name": "John", 
+                "Address": "Unit 2, 12 Main Street, LONDON, WH1 2ER", 
+                "Phone Num": "0789887334", 
+                "Courier": 2, 
+                "Order Status": "preparing", 
+                "Product Items": "1"},
+                
+                {"Name": "James", 
+                "Address": "Unit 9, 19 Main Street, LONDON, WC1 2EY", 
+                "Phone Num": "07897643257", 
+                "Courier": 3, 
+                "Order Status": "preparing",  
+                "Product Items": "2, 4"}]
+
 order_status = ["Preparing", "Awaiting Pickup", "Out-for-Delivery", "Delivered"]
 o_menu = OrderMenu(order_menu)
 
