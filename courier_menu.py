@@ -61,7 +61,11 @@ class CourierMenu():
         print(courier_list)
         c_menu.get_courier_menu()
       
+courier_list = [{'Name': 'UPS', 'Phone': '01623459870'}, 
+                {'Name': 'DHL', 'Phone': '01642357680'}, 
+                {'Name': 'Royal Mail', 'Phone': '01687659843'},
+                {'Name': 'Hemes', 'Phone': '01653427156'}, 
+                {'Name': 'FedEx', 'Phone': '01604827458'}]
 
 courier_menu = ['Main Menu', 'Courier List', 'Create New Courier', 'Update Existing Courier', 'Delete Courier']
-courier_list = ['John', 'James', 'Claire', 'Ann', 'Jenny']
 c_menu = CourierMenu(courier_menu)
