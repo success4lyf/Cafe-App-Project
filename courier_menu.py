@@ -1,8 +1,27 @@
 ### MINI PROJECT WEEK 3 #####
 
+import csv
+
 class CourierMenu():
     def __init__(self, courier_menu):
         self.courier_menu = courier_menu
+        self.couriers_list = []
+
+    def load_couriers(self):
+        with open('file_content/courier.csv', 'r') as file:
+            dict_reader = csv.DictReader(file)
+            self.couriers_list = list(dict_reader)
+            for i, row in enumerate(self.couriers_list):
+                print('\t' + f'{i}: {row} \n')
+        file.close()
+
+    def save_couriers(self):
+        with open('file_content/courier.csv', 'w') as file:
+            writer = csv.writer(file)
+            writer.writerow(['NAME', 'PHONE NUM'])
+            for courier in self.couriers_list:
+                writer.writerow(courier.values())
+        file.close()
 
     def get_courier_menu(self):
         for i, courier in enumerate(courier_menu):
@@ -21,51 +40,86 @@ class CourierMenu():
             c_menu.delete_courier()
 
     def get_courier_list(self):
-        self.courier_list = courier_list
-        print('The courier lists are: ')
-        for i, courier in enumerate(courier_list):            
-            print('\t' + f'{i}: {courier} \n')
+        while True:
+            print('The couriers list are: ')
+            c_menu.load_couriers()
+            break
         c_menu.get_courier_menu()
 
     def create_new_couirer(self):
         print('Create a new courier you want to add to the courier list...')
-        user_new_co = input('Enter a new courier name: ')
-        courier_list.append(user_new_co)
-        print('you created a new courier: ', user_new_co)
-        print('Courier list = ', courier_list)
+        user_cou_name = input('Enter a new courier name: ')
+        user_cou_num = input('Enter the courier phone number: ')
+        print('you created a new courier - ', {'Name': user_cou_name, 'Phone Num': user_cou_num})
+        with open('file_content/courier.csv', 'a') as file:
+            fieldnames = ['NAME', 'PHONE NUM']
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writerow({'NAME': user_cou_name, 'PHONE NUM': user_cou_num})
+        file.close()
+        print('Courier Successfully Added!')
         c_menu.get_courier_menu()
 
     def update_courier(self):
-        print('This are the list of courier names: ')
-        for i, courier in enumerate(courier_list):
-            print(f'{i}: {courier}')
-        print('If you want to update a courier, ')
-        user_cou_num = int(input('Enter an index value of the courier name you want to update: '))        
-        # if user_pro_num > products[i]:
-        #     print('out of range')
-        #     p_menu.update_product()
-        # else:
-        user_cou_name = input('Enter a product name: ')
-        courier_list[user_cou_num] = user_cou_name
-        print('The updated courier list is: ')
-        print(courier_list)
-        c_menu.get_courier_menu()
+        while True:
+            print('This are the list of couriers we have below: ')
+            c_menu.load_couriers()
+            print('If you want to update a courier, ')
+            user_co_num = int(input('Enter an index value of the courier you want to update: '))       
+            if user_co_num > len(self.couriers_list):
+                print('Out of range, Try again!')
+                continue
+
+            else:
+                print('Do you want to update this courier - ', self.couriers_list[user_co_num], '?')
+                answer = input("Enter 'y' for YES and 'n' for NO: " )
+                if answer == 'y':
+                    key_value = input("Enter value if 'NAME' or 'PHONE NUM' you want to update: ")       
+                    if key_value in self.couriers_list[user_co_num]:
+                        print('you want to update the product ',key_value, ' - ', (self.couriers_list[user_co_num])[key_value])
+                        c_update = input('Please input the correct detail now: ')
+                        (self.couriers_list[user_co_num])[key_value] = c_update
+                        print('The updated detail is: ', self.couriers_list[user_co_num], '\n')
+                        print(self.couriers_list)              
+                        c_menu.save_couriers()
+                        print('\n Update Successful!')
+
+                        print('Do you want to update anything else? ')
+                        reply = input("Enter 'y' for YES and 'n' for NO: " )
+                        if reply == 'y':
+                           continue
+                        elif reply == 'n':
+                            print('OK! You have returned to the courier menu')
+                            break
+                        else:
+                            print('your input is blank. nothing to update')
+                            break
+            
+                    else:
+                        print('your input is blank. nothing to update')
+                        break        
+                elif answer == 'n':
+                    print('OK! You have returned to the courier menu')
+                    break
+                else:
+                    print('Invalid Input, Try again')
+                    break
+        c_menu.get_courier_menu()       
 
     def delete_courier(self):
-        print('The courier list are: ')
-        print(courier_list)
-        print('you can choose the courier name you want to delete now!')
-        user_del_co = int(input('Enter an index value of the courier name you want to delete: '))
-        del courier_list[user_del_co]
-        print('The courier names remaining are: ')
-        print(courier_list)
+        while True:
+            print('The courier list are: ')
+            c_menu.load_couriers()
+            print('you can choose a courier to delete now!')
+            user_del_co = int(input('Enter an index value of the courier you want to delete: '))
+            print('You selected - ', self.couriers_list[user_del_co])
+            del self.couriers_list[user_del_co]
+            print('\n Selected Courier Deleted. \n The couriers remaining are: ')
+            print(self.couriers_list)
+            c_menu.save_couriers()
+            break
         c_menu.get_courier_menu()
-      
-courier_list = [{'Name': 'UPS', 'Phone': '01623459870'}, 
-                {'Name': 'DHL', 'Phone': '01642357680'}, 
-                {'Name': 'Royal Mail', 'Phone': '01687659843'},
-                {'Name': 'Hemes', 'Phone': '01653427156'}, 
-                {'Name': 'FedEx', 'Phone': '01604827458'}]
+
 
 courier_menu = ['Main Menu', 'Courier List', 'Create New Courier', 'Update Existing Courier', 'Delete Courier']
 c_menu = CourierMenu(courier_menu)
+# c_menu.get_courier_menu()
