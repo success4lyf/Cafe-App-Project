@@ -1,11 +1,32 @@
 ##### MINI PROJECT WEEK 2 #####
+from product_menu import ProductMenu
+from courier_menu import CourierMenu
+import csv
 
 class OrderMenu():
     def __init__(self, order_menu):
         self.order_menu = order_menu
-        #super().__init__(exit, main_menu)
+        self.orders_list = []
+        self.order_status = order_status
+
+    def load_orders(self):
+        with open('file_content/orders.csv', 'r') as file:
+            dict_reader = csv.DictReader(file)
+            self.orders_list = list(dict_reader)
+            for i, row in enumerate(self.orders_list):
+                print('\t' + f'{i}: {row} \n')
+        file.close()
+
+    def save_orders(self):
+        with open('file_content/orders.csv', 'w') as file:
+            writer = csv.writer(file)
+            writer.writerow(['NAMES', 'ADDRESSES', 'PHONE NUMBERS', 'COURIERS', 'ORDERS STATUS', 'PRODUCT ITEMS'])
+            for order in self.orders_list:
+                writer.writerow(order.values())
+        file.close()
     
     def get_order_menu(self):
+        print('\n')
         for i, option in enumerate(order_menu):
             print(f'{i}: {option}')
 
@@ -13,15 +34,9 @@ class OrderMenu():
         if user_o == 0:
             print(f'You entered {user_o}. You have returned to the main menu!')
         elif user_o == 1:
-            if orders_dict == {}:               
-                print('Orders : ', orders_dict)
-                print('No order details added. You can now add your details!')
-                o_menu.get_order_details()
-            else:
-                print('The current orders are: ', orders_dict)
-                o_menu.get_order_details()      
+            o_menu.get_orders_list()      
         elif user_o == 2:
-            o_menu.get_order_details()
+            o_menu.create_order_details()
         elif user_o == 3:
             o_menu.update_order_status()
         elif user_o == 4:
@@ -31,93 +46,141 @@ class OrderMenu():
         else:
             print('invalid input')
 
-    def get_order_details(self):
-        self.orders_dict = orders_dict
-        self.order_status = order_status
-        self.order_list = orders_list
-        self.name = 'Name'
-        self.address = 'Address'
-        self.phone = 'Phone Num'
-        self.status = 'Order Status'
+    def get_orders_list(self):
+        while True:
+            print('\n' + 'The orders list are: \n')
+            o_menu.load_orders()
+            break
+        o_menu.get_order_menu()
 
-        print('Please enter your details.')       
+    def create_order_details(self):
+        self.orders_dict = {}
+        self.ordered_products = []
+        self.name = 'NAMES'
+        self.address = 'ADDRESSES'
+        self.phone = 'PHONE NUMBERS'
+        self.courier = 'COURIERS'
+        self.status = 'ORDERS STATUS'
+        self.product_items = 'PRODUCT ITEMS'
+
+        print('If you want to create an order, Please enter your details.')       
         user_name = input('Enter your name: ')
         user_address = input('Enter your address: ')
         user_phone = int(input('Enter your phone number: '))
+
+        while True:
+            print('\n This are the list of products we have -: \n')
+            ProductMenu.load_products(self)
+            user_products = int(input('Select the index number of the products you want to order: '))
+            self.ordered_products.append(user_products)
+            print('Do you want to add another products?')
+            answer = input("Enter 'y' for YES and 'n' for NO: " )
+            if answer == 'y':
+                continue
+            elif answer == 'n':
+                print('Thank You')
+                print('Ordered Products are index no -> ', self.ordered_products)
+                product_result = ','.join(map(str, self.ordered_products))
+                # print(product_result)
+                break
+        print('\n This are the available couriers below:  \n')
+        CourierMenu.load_couriers(self)
+        user_courier = int(input('Select the index number of the courier you want to use: '))
+        status = self.order_status[0]
+
         self.orders_dict.update({self.name : user_name})
         self.orders_dict.update({self.address : user_address})
         self.orders_dict.update({self.phone : user_phone})
-        self.orders_dict.update({self.status : self.order_status[0]})
-        self.order_list.append(self.orders_dict)
-        print('Order Details = ', orders_dict)
-        print('List of Orders = ', self.order_list)
-        o_menu.get_order_menu()    
+        self.orders_dict.update({self.courier : user_courier})
+        self.orders_dict.update({self.product_items : product_result})
+        self.orders_dict.update({self.status : status})
+        print('New Order Details = ', self.orders_dict)
+
+        with open('file_content/orders.csv', 'a') as file:
+            fieldnames = ['NAMES', 'ADDRESSES', 'PHONE NUMBERS', 'COURIERS', 'ORDERS STATUS', 'PRODUCT ITEMS']
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writerow( self.orders_dict)
+        file.close()
+        o_menu.get_order_menu()
 
     def update_order_status(self):
-        self.order_status = order_status
-        for i, order in enumerate(orders_list):
-            print(f'{i} = {order}')    
-        user_ol = int(input('Enter the index number of the order list: '))
-        print('you entered', user_ol)
-        print(orders_list[user_ol])
-        
-        for i, status in enumerate(order_status):
-            print(f'{i}: {status}')
-        user_st = int(input('Enter the index number of the order status: '))
-        orders_list[user_ol]['Order Status'] = self.order_status[user_st]
-        print(orders_list[user_ol])
+        while True:
+            o_menu.load_orders()  
+            user_ol = int(input('Enter the index number of the order list: '))
+            print('you entered', user_ol)
+            print(self.orders_list[user_ol])
+            
+            for i, status in enumerate(self.order_status):
+                print(f'{i}: {status}')
+            user_st = int(input('Enter the index number of the order status: '))
+            self.orders_list[user_ol]['ORDERS STATUS'] = self.order_status[user_st]
+            print(self.orders_list[user_ol])
+            o_menu.save_orders()
+            break
+        o_menu.get_order_menu()
 
     def update_existing_orders(self):
-        for i, order in enumerate(orders_list):
-            print(f'{i} = {order}')
-        
-        user_ol = int(input('Enter the index number of the order you want to update: '))
-        print('Do you want to update this order - ', orders_list[user_ol], '?')
-        answer = input("Enter 'y' for YES and 'n' for NO: " )
-        if answer == 'y':
-            print('The keys are: ')
-            for key in orders_list[user_ol]:
-                print(key)
-            key_value = input('Enter the name of the key you want to update in the order: ')
-            if key_value in orders_list[user_ol]:
-                print('you want to update your', key_value, ' - ', (orders_list[user_ol])[key_value])
-                o_update = input('Please input the correct details now: ')
-                (orders_list[user_ol])[key_value] = o_update
-                print('The updated details is: ')
-                print(orders_list[user_ol])
+        while True:
+            o_menu.load_orders()
+            user_ol = int(input('Enter the index number of the order you want to update: '))
+            if user_ol > len(self.orders_list):
+                    print('Out of range, Try again!')
+                    continue
+
             else:
-                print('your input is blank. nothing to update')
-                o_menu.get_order_menu()
-        elif answer == 'n':
-            print('OK! You have returned to the order menu')
-            o_menu.get_order_menu()
+                print('Do you want to update this order - ', self.orders_list[user_ol], '?')
+                answer = input("Enter 'y' for YES and 'n' for NO: " )
+                if answer == 'y':
+                    key_value = input("Enter what you want to update eg: 'NAME' or 'ADDRESS': ")       
+                    if key_value in self.orders_list[user_ol]:
+                        print('you want to update the your ',key_value, ' - ', (self.orders_list[user_ol])[key_value])
+                        o_update = input('Please input the correct detail now: ')
+                        (self.orders_list[user_ol])[key_value] = o_update
+                        print('The updated detail is: ', self.orders_list[user_ol], '\n')
+                        # print(self.orders_list)              
+                        o_menu.save_orders()
+                        print('\n Update Successful!')
+
+                        print('Do you want to update anything else? ')
+                        reply = input("Enter 'y' for YES and 'n' for NO: " )
+                        if reply == 'y':
+                            continue
+                        elif reply == 'n':
+                            print('OK! You have returned to the order menu')
+                            break
+                        else:
+                            print('your input is blank. nothing to update')
+                            break
+                
+                    else:
+                        print('your input is blank. nothing to update')
+                        break        
+                elif answer == 'n':
+                    print('OK! You have returned to the order menu')
+                    break
+                else:
+                    print('Invalid Input, Try again')
+                    break
+        o_menu.get_order_menu()
 
     def delete_order(self):
-        for i, order in enumerate(orders_list):
-            print(f'{i} = {order}')
-
-        user_ol = int(input('Enter the index number of the order you want to delete: '))
-        del orders_list[user_ol]
-        print('This are the remaining orders - ')
-        print(orders_list)
+        while True:
+            print('The order list are: ')
+            o_menu.load_orders()
+            print('you can choose a order details to delete now!')
+            user_or_del = int(input('Enter an index value of the order you want to delete: '))
+            print('\n You selected - ', self.orders_list[user_or_del])
+            del self.orders_list[user_or_del]
+            print('\n Selected Order Deleted.  The orders remaining are: \n')
+            print(self.orders_list)
+            o_menu.save_orders()
+            break
+        o_menu.get_order_menu()
 
 
 order_menu = ['Main Menu', 'Order Details', 'Add Order Details',  'Update Existing Order Status', 'Update Existing Order', 'Delete Order']
-orders_dict = {}
-orders_list = [{"Name": "John", 
-                "Address": "Unit 2, 12 Main Street, LONDON, WH1 2ER", 
-                "Phone Num": "0789887334", 
-                "Courier": 2, 
-                "Order Status": "preparing", 
-                "Product Items": "1"},
-                
-                {"Name": "James", 
-                "Address": "Unit 9, 19 Main Street, LONDON, WC1 2EY", 
-                "Phone Num": "07897643257", 
-                "Courier": 3, 
-                "Order Status": "preparing",  
-                "Product Items": "2, 4"}]
-
 order_status = ["Preparing", "Awaiting Pickup", "Out-for-Delivery", "Delivered"]
+
 o_menu = OrderMenu(order_menu)
+# o_menu.get_order_menu()
 
