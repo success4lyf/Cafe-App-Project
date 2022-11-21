@@ -12,3 +12,5 @@
 ## Mini Project Week 4
 
 ## Mini Project Week 5
+
+## Mini Project Week 6
