@@ -6,3 +6,5 @@
 ## Mini Project Week 1
 
 ## Mini Project Week 2
+
+## Mini Project Week 3
