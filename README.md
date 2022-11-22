@@ -270,7 +270,29 @@ o_menu = OrderMenu(order_menu)
 
 In this week, the courier menu option was created to allow user add, update and delete courier. Also the product list, courier list and order list was saved in a txt file.
 
-## Mini Project Week 4
+### Mini Project Week 4
+
+In week 4, instead of loading data from txt file, data was loaded and saved from csv file for product list, courier list and orders list. the code for loading and saving of product list from csv file is shown below, which is same for both courier and orders list.
+
+```python
+"""
+def load_products(self):
+        with open('file_content/product.csv', 'r') as file:
+            dict_reader = csv.DictReader(file)
+            self.products_list = list(dict_reader)
+            for i, row in enumerate(self.products_list):
+                print('\t' + f'{i}: {row} \n')
+        file.close()
+
+    def save_products(self):
+        with open('file_content/product.csv', 'w') as file:
+            writer = csv.writer(file)
+            writer.writerow(['NAME', 'PRICE'])
+            for product in self.products_list:
+                writer.writerow(product.values())
+        file.close()
+"""
+```
 
 ## Mini Project Week 5
 
