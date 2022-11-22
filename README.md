@@ -47,13 +47,21 @@ class MainMenu:
                 print('\n')
                 print(f'You entered {user}. The product menu options are: ')
                 p_menu.get_product_menu()
+                
+            elif user == 2:
+                print(f'You entered {user}. The courier menu options are: ')                
+                c_menu.get_courier_menu()
+                
+            elif user == 3:
+                print(f'You entered {user}. The order menu options are: ')
+                o_menu.get_order_menu()
 
     def exit_app(self):
         print('You have \x1B[1m EXITED \x1B[0m the App. \n')
         quit()
 
 exit = 'exit'
-menu_option = ['EXIT', 'PRODUCTS']
+menu_option = ['EXIT', 'PRODUCTS', 'COURIER', 'ORDERS']
 m_menu = MainMenu(exit, menu_option)
 
 class ProductMenu():
