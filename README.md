@@ -300,5 +300,6 @@ In week 5, the data is stored in the database instead of csv file. pymysql is us
 
 <img width="673" alt="Screenshot 2022-11-22 at 19 40 50" src="https://user-images.githubusercontent.com/78314396/203407975-6b2dee87-8245-48c8-b3b9-59d4c8ad8435.png">
 
-
 ### Mini Project Week 6
+
+The final code is refactored and unit testing is done on the code to ensure quality of the code and the app is working. the final code and testing code can be found in the main branch for this repository.
