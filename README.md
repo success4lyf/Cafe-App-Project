@@ -13,6 +13,9 @@ As a business:
 - I need  to be sure my app has been tested and proven to work well.
 - I need  to receive regular software updates.
 
+## Project Structure and D
+
+
 ### Mini Project Week 1
 
 In this first week, the foundation of the app was built, in particular, the UI aspect to print to the screen, accept user input, and create a basic list data structure. The main menu and product menu options was created. Below is the week one code:
