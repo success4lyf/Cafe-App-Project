@@ -18,7 +18,7 @@ As a business:
 
 ### Mini Project Week 1
 
-In this first week, the foundation of the app was built, in particular, the UI aspect to print to the screen, accept user input, and create a basic list data structure. The main menu and product menu options was created. Below is the week one code:
+In this first week, the foundation of the app was built, in particular, the UI aspect to print to the screen, accept user input, and create a basic list data structure. The main menu and product menu options were created. Below is the week one code:
 
 ```python
 """
