@@ -173,18 +173,87 @@ class OrderMenu():
     def create_order_details(self):
         self.orders_dict = {}
         self.order_status = order_status
-        # self.ordered_products = []
         self.name = 'NAMES'
         self.address = 'ADDRESSES'
         self.phone = 'PHONE NUMBERS'
-        # self.courier = 'COURIERS'
         self.status = 'ORDERS STATUS'
-        # self.product_items = 'PRODUCT ITEMS'
 
         print('If you want to create an order, Please enter your details.')       
         user_name = input('Enter your name: ')
         user_address = input('Enter your address: ')
         user_phone = int(input('Enter your phone number: '))
+        self.orders_dict.update({self.name : user_name})
+        self.orders_dict.update({self.address : user_address})
+        self.orders_dict.update({self.phone : user_phone})
+        self.orders_dict.update({self.status : self.order_status[0]})
+        print('New Order Details = ', self.orders_dict, '\n')
+        self.orders_list.append(self.orders_dict)
+        print(self.orders_list)
+        print('\nOrders Added')
+        o_menu.get_order_menu()
+        
+    def update_order_status(self):
+        print('\n' + 'The orders list are: \n')
+        for i, option in enumerate(self.orders_list):
+            print(f'{i} -> {option}')
+            print(' ')
+        user_ol = int(input('Enter the index number of the order list: '))
+        print('you entered', user_ol)
+        print(self.orders_list[user_ol])
+            
+        for i, status in enumerate(self.order_status):
+            print(f'{i}: {status}')
+        user_st = int(input('Enter the index number of the order status: '))
+        self.orders_list[user_ol]['ORDERS STATUS'] = self.order_status[user_st]
+        print(self.orders_list[user_ol])
+        o_menu.get_order_menu()
+
+    def update_existing_orders(self):
+        print('\n' + 'The orders list are: \n')
+        for i, option in enumerate(self.orders_list):
+            print(f'{i} -> {option}')
+            print(' ')
+        user_ol = int(input('Enter the index number of the order you want to update: '))
+        print(self.orders_list[user_ol])
+        key_value = input("Enter what you want to update eg: 'NAME' or 'ADDRESS': ")       
+        if key_value in self.orders_list[user_ol]:
+            print('you want to update the your ',key_value, ' - ', (self.orders_list[user_ol])[key_value])
+            o_update = input('Please input the correct detail now: ')
+            (self.orders_list[user_ol])[key_value] = o_update
+            print('The updated detail is: ', self.orders_list[user_ol], '\n')
+            print(self.orders_list)  
+            print('\n Update Successful!')
+        else:
+            print('your input is incorrect!. nothing to update. \nyou have returned to the order menu')
+        o_menu.get_order_menu()
+
+    def delete_order(self):
+        print('\n' + 'The orders list are: \n')
+        for i, option in enumerate(self.orders_list):
+            print(f'{i} -> {option}')
+            print(' ')
+        print('you can choose a order details to delete now!')
+        user_or_del = int(input('Enter an index value of the order you want to delete: '))
+        print('\n You selected - ', self.orders_list[user_or_del])
+        del self.orders_list[user_or_del]
+        print('\n Selected Order Deleted.  The orders remaining are: \n')
+        print(self.orders_list)
+        o_menu.get_order_menu()
+        
+order_list = [{
+  "customer_name": "John",
+  "customer_address": "Unit 2, 12 Main Street, LONDON, WH1 2ER",
+  "customer_phone": "0789887334",
+  "status": "preparing"
+}, {
+  "customer_name": "James",
+  "customer_address": "Unit 7, 19 Main Street, LONDON, WC8 2UR",
+  "customer_phone": "07898567437",
+  "status": "preparing"
+}]
+order_menu = ['Main Menu', 'Order Details', 'Add Order Details',  'Update Existing Order Status', 'Update Existing Order', 'Delete Order']
+order_status = ["Preparing", "Awaiting Pickup", "Out-for-Delivery", "Delivered"]
+o_menu = OrderMenu(order_menu)
         
 """
 ```
