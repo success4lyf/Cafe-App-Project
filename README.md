@@ -1,5 +1,6 @@
 # Cafe-App-Project
-> A pop-up Cafe App that lets user to log and track orders
+
+> A client has launched a pop-up café in a busy business district. They are offering home-made lunches and refreshments to the surrounding offices. As such, they require a software application which helps them to log and track orders.
 
 ## Client Requirements
 
