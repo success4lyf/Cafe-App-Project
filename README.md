@@ -5,7 +5,7 @@
 ## Client Requirements
 
 As a business:
-- I want to. maintain a collection of products and couriers.
+- I want to maintain a collection of products and couriers.
 - When a customer makes a new order, I need to create this on the system.
 - I need to be able to update the status of an order i.e: preparing, out-for-delivery, delivered.
 - When I exit myapp, I need all data to be persisted and not lost.
@@ -266,7 +266,9 @@ o_menu = OrderMenu(order_menu)
 """
 ```
 
-## Mini Project Week 3
+### Mini Project Week 3
+
+In this week, the courier menu option was created to allow user add, update and delete courier. Also the product list, courier list and order list was saved in a txt file.
 
 ## Mini Project Week 4
 
