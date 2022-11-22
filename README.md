@@ -134,6 +134,61 @@ m_menu.get_main_menu()
 ### Mini Project Week 2
 In week 2, order menu option was included with the order list as dictionary containing customer name, address and phone number. the code will be able to print order list, create new orders, update existing order and delete orders just as with the product menu. order menu code is shown below:
 
+```python
+"""
+class OrderMenu():
+    def __init__(self, order_menu):
+        self.order_menu = order_menu
+        self.orders_list = order_list
+        self.order_status = order_status
+
+    def get_order_menu(self):
+        print('\n')
+        for i, option in enumerate(order_menu):
+            print(f'{i}: {option}')
+
+        user_o = int(input('enter an order menu option:'))
+        if user_o == 0:
+            print(f'You entered {user_o}. You have returned to the main menu!')
+        elif user_o == 1:
+            o_menu.get_orders_list()      
+        elif user_o == 2:
+            o_menu.create_order_details()
+        elif user_o == 3:
+            o_menu.update_order_status()
+        elif user_o == 4:
+            o_menu.update_existing_orders()
+        elif user_o == 5:
+            o_menu.delete_order()
+        else:
+            print('invalid input')
+
+    def get_orders_list(self):
+        print('\n' + 'The orders list are: \n')
+        for i, option in enumerate(self.orders_list):
+            print(f'{i} -> {option}')
+            print(' ')
+        o_menu.get_order_menu()
+
+    def create_order_details(self):
+        self.orders_dict = {}
+        self.order_status = order_status
+        # self.ordered_products = []
+        self.name = 'NAMES'
+        self.address = 'ADDRESSES'
+        self.phone = 'PHONE NUMBERS'
+        # self.courier = 'COURIERS'
+        self.status = 'ORDERS STATUS'
+        # self.product_items = 'PRODUCT ITEMS'
+
+        print('If you want to create an order, Please enter your details.')       
+        user_name = input('Enter your name: ')
+        user_address = input('Enter your address: ')
+        user_phone = int(input('Enter your phone number: '))
+        
+"""
+```
+
 ## Mini Project Week 3
 
 ## Mini Project Week 4
