@@ -272,7 +272,7 @@ In this week, the courier menu option was created to allow user add, update and 
 
 ### Mini Project Week 4
 
-In week 4, instead of loading data from txt file, data was loaded and saved from csv file for product list, courier list and orders list. the code for loading and saving of product list from csv file is shown below, which is same for both courier and orders list.
+In week 4, instead of loading data from txt file, data was loaded and saved from csv file for product list, courier list and orders list. the code for loading and saving of product list from csv file is shown below, which is same for both courier and orders list. this function is called in all the menu  options to load and save files.
 
 ```python
 """
