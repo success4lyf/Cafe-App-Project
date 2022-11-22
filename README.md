@@ -302,4 +302,4 @@ In week 5, the data is stored in the database instead of csv file. pymysql is us
 
 ### Mini Project Week 6
 
-The final code is refactored and unit testing is done on the code to ensure quality of the code and the app is working. the final code and testing code can be found in the main branch for this repository.
+The final code is refactored and unit testing is done on the code to ensure quality of the code and that the app is working. the final code and testing code can be found in the main branch for this repository.
