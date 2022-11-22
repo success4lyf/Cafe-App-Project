@@ -296,4 +296,8 @@ def load_products(self):
 
 ## Mini Project Week 5
 
+In week 5, the data is stored in the database instead of csv file. pymysql is used to connect to mysql database. Product, Courier, Order and Order status tables were created with pymysql connector and data from the table was fetched, inserted, updated and deleted in the code. In the main branch of this project you will see the code for loading the csv file to the database after converting it to dataframe using pandas and then creating tables in the database. Below is the image of the database for product table:
+
+
+
 ## Mini Project Week 6
