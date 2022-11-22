@@ -131,7 +131,8 @@ m_menu.get_main_menu()
 ```
 
 
-## Mini Project Week 2
+### Mini Project Week 2
+In week 2, order menu option was included with the order list as dictionary containing customer name, address and phone number. the code will be able to print order list, create new orders, update existing order and delete orders just as with the product menu. order menu code is shown below:
 
 ## Mini Project Week 3
 
