@@ -1,11 +1,33 @@
-### MINI PROJECT WEEK 3 #####
-
 import csv
+import pymysql
+import os
+from dotenv import load_dotenv
 
 class CourierMenu():
     def __init__(self, courier_menu):
         self.courier_menu = courier_menu
         self.couriers_list = []
+
+        load_dotenv()
+        host = os.environ.get("mysql_host")
+        user = os.environ.get("mysql_user")
+        password = os.environ.get("mysql_pass")
+        database = os.environ.get("mysql_db")
+
+        self.connection = pymysql.connect(
+            host,
+            user,
+            password,
+            database
+        )
+
+        self.cursor = self.connection.cursor()
+
+    def get_couriers_from_sql(self):
+        self.cursor.execute('SELECT * FROM couriers')
+        rows = self.cursor.fetchall()
+        for row in rows:
+            print(f'COURIER_ID: {str(row[0])}, COURIER_NAME: {str(row[1])}, PHONE_NUM: {str(row[2])}')
 
     def load_couriers(self):
         with open('file_content/courier.csv', 'r') as file:
@@ -42,80 +64,63 @@ class CourierMenu():
     def get_courier_list(self):
         while True:
             print('The couriers list are: ')
-            c_menu.load_couriers()
+            c_menu.get_couriers_from_sql()
             break
         c_menu.get_courier_menu()
 
     def create_new_couirer(self):
-        print('Create a new courier you want to add to the courier list...')
-        user_cou_name = input('Enter a new courier name: ')
-        user_cou_num = input('Enter the courier phone number: ')
-        print('you created a new courier - ', {'Name': user_cou_name, 'Phone Num': user_cou_num})
-        with open('file_content/courier.csv', 'a') as file:
-            fieldnames = ['NAME', 'PHONE NUM']
-            writer = csv.DictWriter(file, fieldnames=fieldnames)
-            writer.writerow({'NAME': user_cou_name, 'PHONE NUM': user_cou_num})
-        file.close()
+        print('Create a new courier you want to add to the courier table.')
+        user_new = input('Enter a new courier name: ')
+        user_pho = input('Enter the phone number: ')        
+        print('you created a new courier - ', 'Courier Name: ',user_new, ',', 'Phone: ',user_pho)
+        sql = "INSERT INTO couriers (COURIER_NAME, PHONE_NUM) VALUES (%s, %s)"
+        val = (user_new, user_pho)
+        self.cursor.execute(sql, val)
+        self.connection.commit()
+        print(self.cursor.rowcount, "record inserted.")
         print('Courier Successfully Added!')
         c_menu.get_courier_menu()
 
     def update_courier(self):
         while True:
-            print('This are the list of couriers we have below: ')
-            c_menu.load_couriers()
-            print('If you want to update a courier, ')
-            user_co_num = int(input('Enter an index value of the courier you want to update: '))       
-            if user_co_num > len(self.couriers_list):
-                print('Out of range, Try again!')
-                continue
-
+            print('This are the list of couriers we have below: \n')
+            c_menu.get_couriers_from_sql()
+            print('If you want to update a courier, \n')
+            user_cou_id = input('Enter the courier id you want to update: ')
+            user_cou_name = input('Enter the name of the courier you want to update: ')
+            user_cou_pho = input('Enter the phone number of the courier: ')
+            if user_cou_id == "":
+                print(' \n Your input for courier id is blank, No updates recorded.')
+                break
+            elif user_cou_name == "":
+                print(' \n Your input for courier name is blank, No updates recorded.')
+                break
+            elif user_cou_pho == "":
+                print(' \n Your input for courier phone number is blank, No updates recorded.')
+                break
             else:
-                print('Do you want to update this courier - ', self.couriers_list[user_co_num], '?')
-                answer = input("Enter 'y' for YES and 'n' for NO: " )
-                if answer == 'y':
-                    key_value = input("Enter value if 'NAME' or 'PHONE NUM' you want to update: ")       
-                    if key_value in self.couriers_list[user_co_num]:
-                        print('you want to update the product ',key_value, ' - ', (self.couriers_list[user_co_num])[key_value])
-                        c_update = input('Please input the correct detail now: ')
-                        (self.couriers_list[user_co_num])[key_value] = c_update
-                        print('The updated detail is: ', self.couriers_list[user_co_num], '\n')
-                        print(self.couriers_list)              
-                        c_menu.save_couriers()
-                        print('\n Update Successful!')
-
-                        print('Do you want to update anything else? ')
-                        reply = input("Enter 'y' for YES and 'n' for NO: " )
-                        if reply == 'y':
-                           continue
-                        elif reply == 'n':
-                            print('OK! You have returned to the courier menu')
-                            break
-                        else:
-                            print('your input is blank. nothing to update')
-                            break
-            
-                    else:
-                        print('your input is blank. nothing to update')
-                        break        
-                elif answer == 'n':
-                    print('OK! You have returned to the courier menu')
-                    break
-                else:
-                    print('Invalid Input, Try again')
-                    break
+                print('You want to update courier id -', user_cou_id, 'with new courier name -', user_cou_name, 'and new phone number -', user_cou_pho, '\n')
+                sql = "UPDATE couriers SET COURIER_NAME = %s, PHONE_NUM = %s WHERE COURIER_ID = %s"
+                val = (user_cou_name, user_cou_pho, user_cou_id)
+                self.cursor.execute(sql, val)
+                self.connection.commit()
+                print(self.cursor.rowcount, "record(s) affected")
+                print('Details Updated Successfully!.')
+                break
         c_menu.get_courier_menu()       
 
     def delete_courier(self):
         while True:
-            print('The courier list are: ')
-            c_menu.load_couriers()
-            print('you can choose a courier to delete now!')
-            user_del_co = int(input('Enter an index value of the courier you want to delete: '))
-            print('You selected - ', self.couriers_list[user_del_co])
-            del self.couriers_list[user_del_co]
-            print('\n Selected Courier Deleted. \n The couriers remaining are: ')
-            print(self.couriers_list)
-            c_menu.save_couriers()
+            print('\n The couriers list are: \n')
+            c_menu.get_couriers_from_sql()
+            print('\n You can choose the courier to delete now! \n')
+            user_co_del = input('Enter the courier id you want to delete: \n')
+            print('You selected courier id - ', user_co_del)
+            sql = "DELETE FROM couriers WHERE COURIER_ID = %s"
+            val = (user_co_del)
+            self.cursor.execute(sql, val)
+            self.connection.commit()
+            print(self.cursor.rowcount, "record(s) deleted")
             break
         c_menu.get_courier_menu()
 
