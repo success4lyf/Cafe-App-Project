@@ -1,5 +1,3 @@
-##### MINI PROJECT WEEK 1 #####
-
 from product_menu import ProductMenu
 from order_menu import OrderMenu
 from courier_menu import CourierMenu
@@ -8,6 +6,7 @@ class MainMenu:
     def __init__(self, exit, menu_option):
         self.exit = exit
         self.menu_option = menu_option
+        self.order_list = []
         print('\n' * 2)
         print('*' * 10 + ' ' + '\x1B[1m' + 'WELCOME TO OUR POP-UP CAFE APP!' + '\x1B[0m' + ' ' + '*' * 10)
         
@@ -18,17 +17,14 @@ class MainMenu:
             for i, menu in enumerate(menu_option):
                 print(f'{i} -> {menu}')
                 print(' ')
-
+            
             user = int(input('Enter a main menu option: '))
             if user == 0:
                 print('\n' + f'You entered {user} -> {menu_option[0]}. \n')
-                   
-                print('file saved')
                 m_menu.exit_app()
 
             elif user == 1:
-                print('\n')
-                print(f'You entered {user}. The product menu options are: ')
+                print(f'\n You entered {user}. The product menu options are: ')
                 ProductMenu.get_product_menu(self)         
 
             elif user == 2:
