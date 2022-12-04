@@ -13,7 +13,7 @@ As a business:
 - I need  to be sure my app has been tested and proven to work well.
 - I need  to receive regular software updates.
 
-## Project Structure and D
+## Project Structure
 
 
 ### Mini Project Week 1
