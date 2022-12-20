@@ -1,5 +1,5 @@
 import unittest
-from main_menu import MainMenu
+from app.main_menu import MainMenu
 from unittest.mock import Mock, patch
 
 
