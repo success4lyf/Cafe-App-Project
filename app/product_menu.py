@@ -131,4 +131,3 @@ class ProductMenu():
 product_menu = ['MAIN MENU', 'PRODUCT LIST', 'CREATE', 'UPDATE', 'DELETE']
 p_menu = ProductMenu(product_menu)
 # p_menu.get_product_menu()
-

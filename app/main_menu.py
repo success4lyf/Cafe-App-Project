@@ -44,3 +44,4 @@ if __name__ == "__main__":
     menu_option = ['EXIT', 'PRODUCTS', 'COURIER', 'ORDERS']
     m_menu = MainMenu(exit, menu_option)
     m_menu.get_main_menu()
+    
