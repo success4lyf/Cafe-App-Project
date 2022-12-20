@@ -18,11 +18,5 @@ services:
       - type: volume
         source: my_db
         target: /var/lib/mysql
-  # adminer:
-  #   image: adminer
-  #   container_name: adminer_container
-  #   restart: always
-  #   ports:
-  #     - 8080:8080
 volumes:
   my_db:
