@@ -27,7 +27,7 @@ In week 2, order menu option was included with the order list as dictionary cont
 
 ### Mini Project Week 3
 
-In this week, the courier menu option was created to allow user add, update and delete courier. Also the product list, courier list and order list was saved in a txt file.
+In this week, the courier menu option was created to allow user add, update and delete courier. Also the product list, courier list and order list was saved in a txt file initially.
 
 ### Mini Project Week 4
 
