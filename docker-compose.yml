@@ -1,5 +1,10 @@
 version: "3.8"
 services:
+  app:
+    build: ./database/
+    command: sh -c "sleep 10s ; python ./connect_db.py"
+    depends_on:
+      - "db"
   db:
     image: mysql
     container_name: mysql_container
@@ -13,11 +18,11 @@ services:
       - type: volume
         source: my_db
         target: /var/lib/mysql
-  adminer:
-      image: adminer
-      container_name: adminer_container
-      restart: always
-      ports:
-        - 8080:8080
+  # adminer:
+  #   image: adminer
+  #   container_name: adminer_container
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
 volumes:
   my_db:
