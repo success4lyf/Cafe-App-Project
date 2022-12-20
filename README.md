@@ -18,11 +18,11 @@ As a business:
 
 ### Mini Project Week 1
 
-In this first week, the foundation of the app was built, in particular, the UI aspect to print to the screen, accept user input, and create a basic list data structure. The main menu and product menu options were created. Below is the week one code:
+In this first week, the foundation of the app was built, in particular, the UI aspect to print to the screen, accept user input, and create a basic list data structure. The main menu and product menu options were created.
 
 
 ### Mini Project Week 2
-In week 2, order menu option was included with the order list as dictionary containing customer name, address and phone number. the code will be able to print order list, create new orders, update existing order and delete orders just as with the product menu. order menu code is shown below:
+In week 2, order menu option was included with the order list as dictionary containing customer name, address and phone number. the code will be able to print order list, create new orders, update existing order and delete orders just as with the product menu.
 
 
 ### Mini Project Week 3
@@ -31,7 +31,7 @@ In this week, the courier menu option was created to allow user add, update and 
 
 ### Mini Project Week 4
 
-In week 4, instead of loading data from txt file, data was loaded and saved from csv file for product list, courier list and orders list. the code for loading and saving of product list from csv file is shown below, which is same for both courier and orders list. this function is called in all the menu  options to load and save files.
+In week 4, instead of loading data from txt file, data was loaded and saved from csv file for product list, courier list and orders list. The code for loading and saving of product list from csv file is shown below, which is same for both courier and orders list. This function is called in all the menu  options to load and save files.
 
 ```python
 """
