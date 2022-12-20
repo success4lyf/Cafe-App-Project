@@ -103,6 +103,7 @@ class Database():
             """ 
             val = (row.CUSTOMER_NAME, row.CUSTOMER_ADDRESS, row.CUSTOMER_PHONE, row.COURIER_ID, row.ORDER_STATUS_ID, row.PRODUCT_ITEMS)
             self.cursor.execute(sql, val)
+
         self.connection.commit()
         self.cursor.close()
         self.connection.close()
